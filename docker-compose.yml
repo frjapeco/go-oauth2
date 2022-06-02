@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  envoy:
+    container_name: envoy
+    image: envoyproxy/envoy:v1.20-latest
+    command: [ "envoy", "-c", "/etc/envoy/envoy.yml" ]
+    volumes:
+      - /home/javier-costas/Desktop/go-oauth2/envoy.yml:/etc/envoy/envoy.yml
+      - /home/javier-costas/Desktop/go-oauth2/certs:/etc/envoy/certs
+    network_mode: host
+  ldap:
+    container_name: ldap
+    image: osixia/openldap:1.5.0
+    volumes:
+      - /home/javier-costas/Desktop/go-oauth2/frjapeco.ldif:/frjapeco.ldif
+    environment:
+      - LDAP_ORGANISATION=fjpc
+      - LDAP_DOMAIN=localhost
+      - LDAP_BASE_DN=dc=localhost
+      - LDAP_ADMIN_PASSWORD=123456
+    ports:
+      - "389:389"
+      - "636:636"

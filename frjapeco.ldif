@@ -1,0 +1,7 @@
+dn: uid=frjapeco,dc=localhost
+uid: frjapeco
+cn: frjapeco
+objectClass: top
+uidNumber: 14583102
+gidNumber: 14564100
+mail: frjapeco@gmail.com
