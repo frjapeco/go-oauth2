@@ -39,13 +39,13 @@ func (s *Server) Start() error {
 func (s *Server) rootHandler(w http.ResponseWriter, r *http.Request) {
 	cookie, _ := r.Cookie(s.Config.Cookies.AuthToken)
 	if cookie == nil {
-		oauth2.LoginUser(w, r, s.Config)
+		oauth2.Login(w, r, s.Config)
 		return
 	}
 	user, err := oauth2.GetUserInfo(cookie.Value, s.Config.OAuth2)
 	if err != nil {
 		log.Println(err)
-		oauth2.LoginUser(w, r, s.Config)
+		oauth2.Login(w, r, s.Config)
 		return
 	}
 	if _, exists := validEmails[user.Email]; exists {
